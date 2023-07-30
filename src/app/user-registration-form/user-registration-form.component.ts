@@ -38,7 +38,7 @@ export class UserRegistrationFormComponent implements OnInit {
         });
       },
       (result) => {
-        this.snackBar.open(result, 'OK', {
+        this.snackBar.open(`Welcome ${result.user.Username}!`, 'OK', {
           duration: 2000,
         });
       }

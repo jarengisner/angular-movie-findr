@@ -40,7 +40,7 @@ export class UserLoginFormComponent implements OnInit {
         });
       },
       (result) => {
-        this.snackBar.open(result, 'OK', {
+        this.snackBar.open(`Welcome back ${result.user.Username}!`, 'OK', {
           duration: 2000,
         });
       }
