@@ -24,12 +24,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 //import icon for favorites//
 import { MatIconModule } from '@angular/material/icon';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 //declares our routes into the application//
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+  { path: 'user', component: UserProfileComponent },
 ];
 
 @NgModule({
@@ -39,6 +42,7 @@ const appRoutes: Routes = [
     UserLoginFormComponent,
     MovieCardComponent,
     WelcomePageComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

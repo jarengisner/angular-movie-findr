@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.form {
+  display: block;
+}

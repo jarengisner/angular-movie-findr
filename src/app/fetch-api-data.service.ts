@@ -67,10 +67,15 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  public getUser(userName: any): Observable<any> {
+  public getUser(): Observable<any> {
+    let user: any = localStorage.getItem('user');
+    user = JSON.parse(user);
+    const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'users/' + userName, {
-        /*placeholder for authorization*/
+      .get(apiUrl + 'users/' + user.Username, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }

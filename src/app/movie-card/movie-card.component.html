@@ -1,6 +1,11 @@
 <!-- src/app/movie-card/movie-card.component.html -->
-<div style="display: flex;">
-    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
+<mat-toolbar class="navbar">
+    <span style="font-size: xx-large; margin-left: 20px;">MovieFindr</span>
+    <button mat-button style="margin-right: 20px;" (click)="openUserProfileComponent()">Profile</button>
+</mat-toolbar>
+<div style="display: flex;  width:100%; overflow: auto; height: auto;">
+
+    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; margin: 1rem;">
         <mat-card-header>
             <mat-card-title>{{movie.Title}}</mat-card-title>
             <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>

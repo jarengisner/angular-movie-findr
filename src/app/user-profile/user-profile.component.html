@@ -1,0 +1,27 @@
+<mat-toolbar class="navbar">
+    <span style="font-size: xx-large; margin-left: 20px;">MovieFindr</span>
+    <button mat-button style="margin-right: 20px;">Logout</button>
+</mat-toolbar>
+<div class="userDiv">
+    <h1>{{user.Username}}</h1>
+    <button (click)="this.userTesting()">click to test</button>
+</div>
+<div class="form-div">
+    <form id="toggler">
+        <label>Username</label>
+        <mat-form-field style="display: block; margin-top: 5px;">
+            <input matInput [(ngModel)]="newUserDetails.Username" placeholder="Username" type="text" name="Username"
+                value="{{newUserDetails.Username}}" required>
+        </mat-form-field>
+        <label>Password</label>
+        <mat-form-field style="display: block; margin-top: 5px">
+            <input matInput [(ngModel)]="newUserDetails.Password" placeholder="Password" type="text" name="Password"
+                value="{{newUserDetails.Password}}" required>
+        </mat-form-field>
+        <label>Email</label>
+        <mat-form-field style="display: block;  margin-top: 5px">
+            <input matInput [(ngModel)]="newUserDetails.Email" placeholder="Email" type="text" name="Email"
+                value="{{newUserDetails.Email}}" required>
+        </mat-form-field>
+    </form>
+</div>
