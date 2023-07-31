@@ -33,9 +33,12 @@ export class FetchApiDataService {
   }
 
   public getAllMovies(): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies', {
-        /*placeholder for an auth token?????*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
