@@ -57,6 +57,15 @@ export class UserProfileComponent {
       );
   }
 
+  deleteUserAccount(): void {
+    this.fetchApiData.deleteUser(this.user.Username).subscribe((result) => {
+      console.log(result);
+      this.snackBar.open('User account successfully deleted', 'OK', {
+        duration: 2000,
+      });
+    });
+  }
+
   userTesting(): void {
     console.log('hello');
     document.getElementById('#toggler')?.classList.toggle('hidden');

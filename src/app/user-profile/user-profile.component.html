@@ -4,7 +4,7 @@
 </mat-toolbar>
 <div class="userDiv">
     <h1>{{user.Username}}</h1>
-    <button (click)="this.userTesting()">click to test</button>
+    <!-- <button (click)="this.userTesting()">click to test</button> -->
 </div>
 <div class="form-div">
     <form id="toggler">
@@ -23,6 +23,10 @@
             <input matInput [(ngModel)]="newUserDetails.Email" placeholder="Email" type="text" name="Email"
                 value="{{newUserDetails.Email}}" required>
         </mat-form-field>
-        <button mat-button primary (click)="updateThisUser()">Submit</button>
+        <button mat-raised-button color="primary" (click)="updateThisUser()">Submit</button>
     </form>
+</div>
+<div class="delete-acc">
+    <h1 class="delete-item" id="delete-title">Delete Account</h1>
+    <button mat-raised-button color="warn" class="delete-item" (click)="deleteUserAccount()">Delete Account</button>
 </div>
