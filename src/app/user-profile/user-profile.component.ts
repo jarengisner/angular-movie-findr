@@ -40,7 +40,21 @@ export class UserProfileComponent {
 
   //function that will call our api updating function on our new updated user from our form dialog
   updateThisUser(): void {
-    //placeholder
+    this.fetchApiData
+      .editUser(this.newUserDetails, this.user.Username)
+      .subscribe(
+        (result) => {
+          localStorage.setItem('user', result);
+          this.snackBar.open('User successfully updated', 'OK', {
+            duration: 2000,
+          });
+        },
+        (result) => {
+          this.snackBar.open(result, 'OK', {
+            duration: 2000,
+          });
+        }
+      );
   }
 
   userTesting(): void {

@@ -23,5 +23,6 @@
             <input matInput [(ngModel)]="newUserDetails.Email" placeholder="Email" type="text" name="Email"
                 value="{{newUserDetails.Email}}" required>
         </mat-form-field>
+        <button mat-button primary (click)="updateThisUser()">Submit</button>
     </form>
 </div>

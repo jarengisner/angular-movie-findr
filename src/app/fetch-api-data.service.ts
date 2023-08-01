@@ -44,25 +44,34 @@ export class FetchApiDataService {
   }
 
   public getOneMovie(title: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/' + title, {
-        /*placeholder for authorization*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
 
   public getDirector(name: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/' + 'directors/' + name, {
-        /*placeholder for authorization*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
 
   public getGenre(genre: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'movies/' + 'genres/' + genre, {
-        /*placeholder for authorization*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
@@ -81,38 +90,57 @@ export class FetchApiDataService {
   }
 
   public getUserFavorites(userName: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .get(apiUrl + 'users/' + 'favorites/' + userName, {
-        /*placeholder for authorization*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
 
   public addMovieToFavorites(movieId: any, userName: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .put(apiUrl + 'users/' + userName + 'movies/' + movieId, {
-        /*placeholder for authorization*/
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
 
   //not sure xactly where to place authentication in this one//
   public editUser(newUserDetails: any, userName: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
-      .put(apiUrl + 'users/' + userName, newUserDetails)
+      .put(apiUrl + 'users/' + userName, newUserDetails, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
       .pipe(catchError(this.handleError));
   }
 
   public deleteUser(userName: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
-      .delete(apiUrl + 'users/' + userName)
+      .delete(apiUrl + 'users/' + userName, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
       .pipe(catchError(this.handleError));
   }
 
   public deleteFavorite(movieId: any, userName: any): Observable<any> {
+    const token = localStorage.getItem('token');
     return this.http
       .put(apiUrl + 'users/' + userName + 'movies/' + movieId, {
-        /*placeholder for authorization */
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
       })
       .pipe(catchError(this.handleError));
   }
