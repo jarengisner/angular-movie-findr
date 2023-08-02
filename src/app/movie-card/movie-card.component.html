@@ -1,9 +1,12 @@
 <!-- src/app/movie-card/movie-card.component.html -->
 <mat-toolbar class="navbar">
-    <span style="font-size: xx-large; margin-left: 20px;">MovieFindr</span>
-    <button mat-button style="margin-right: 20px;" (click)="openUserProfileComponent()">Profile</button>
+    <span class="navbar-title" style="font-size: xx-large; margin-left: 20px;"
+        (click)="sendUserHome()">MovieFindr</span>
+    <button mat-flat-button color="primary" style="margin-right: 20px;"
+        (click)="openUserProfileComponent()">Profile</button>
 </mat-toolbar>
-<div style="display: flex;  width:100%; overflow: auto; height: auto;">
+<!-- <div style="display: flex;  width:100%; overflow: auto; height: auto;"> -->
+<div class="movie-container">
 
     <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; margin: 1rem;">
         <mat-card-header>
@@ -12,16 +15,16 @@
         </mat-card-header>
         <img src={{movie.ImageUrl}} alt={{movie.Title}} />
         <mat-card-actions>
-            <button mat-button color="primary">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
                 Genre
             </button>
-            <button mat-button color="primary">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
                 Director
             </button>
-            <button mat-button color="primary">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
                 Synopsis
             </button>
-            <mat-icon>favorite_border</mat-icon>
+            <mat-icon style="cursor: pointer;" (click)="favoriteMovie(movie._id)">favorite_border</mat-icon>
         </mat-card-actions>
     </mat-card>
 </div>

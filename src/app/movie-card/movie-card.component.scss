@@ -2,3 +2,16 @@
   display: flex;
   justify-content: space-between;
 }
+
+.navbar-title {
+  cursor: pointer;
+}
+
+.movie-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+/* .movie-card-button {
+  padding: 10;
+} */

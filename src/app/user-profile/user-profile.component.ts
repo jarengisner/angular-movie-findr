@@ -3,6 +3,12 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+//imports our router into the login page
+import { Router } from '@angular/router';
+
+//imports our user favorites component
+import { UserFavoritesComponent } from '../user-favorites/user-favorites.component';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -20,7 +26,8 @@ export class UserProfileComponent {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +64,7 @@ export class UserProfileComponent {
       );
   }
 
+  //function for deleting an account
   deleteUserAccount(): void {
     this.fetchApiData.deleteUser(this.user.Username).subscribe((result) => {
       console.log(result);
@@ -64,6 +72,17 @@ export class UserProfileComponent {
         duration: 2000,
       });
     });
+  }
+
+  //function for logging out
+  logOut(): void {
+    localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
+    this.router.navigate(['welcome']);
+  }
+
+  sendUserHome(): void {
+    this.router.navigate(['movies']);
   }
 
   userTesting(): void {

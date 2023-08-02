@@ -100,10 +100,14 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  public addMovieToFavorites(movieId: any, userName: any): Observable<any> {
-    const token = localStorage.getItem('token');
+  public addMovieToFavorites(movieId: any): Observable<any> {
+    let token = localStorage.getItem('token');
+    token = JSON.stringify(token);
+    let user: any = localStorage.getItem('user');
+    user = JSON.parse(user);
+    console.log(user);
     return this.http
-      .put(apiUrl + 'users/' + userName + 'movies/' + movieId, {
+      .put(apiUrl + 'users/' + user.Username + '/' + 'movies/' + movieId, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -112,8 +116,10 @@ export class FetchApiDataService {
   }
 
   //not sure xactly where to place authentication in this one//
+  //THIS ONE IS INCORRECT I THINK//
   public editUser(newUserDetails: any, userName: any): Observable<any> {
     const token = localStorage.getItem('token');
+    //FIX THIS REQUEST
     return this.http
       .put(apiUrl + 'users/' + userName, newUserDetails, {
         headers: new HttpHeaders({

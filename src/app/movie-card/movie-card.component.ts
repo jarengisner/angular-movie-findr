@@ -35,22 +35,26 @@ export class MovieCardComponent {
 
   //function to push movie into favorites//
   //function adds movie to favorites and then opens a snackbar to tell you it was completed//
-  favoriteMovie(movieId: string, userName: string): void {
-    console.log(movieId + ',' + userName);
-    this.fetchApiData
-      .addMovieToFavorites(movieId, userName)
-      .subscribe((resp: any) => {
-        console.log(resp);
-        this.snackBar.open('Movie added to favorites', 'OK', {
-          duration: 2000,
-        });
-        this.ngOnInit();
+  favoriteMovie(movieId: any): void {
+    console.log(movieId);
+    this.fetchApiData.addMovieToFavorites(movieId).subscribe((resp: any) => {
+      console.log(movieId);
+      console.log(resp);
+      this.snackBar.open('Movie added to favorites', 'OK', {
+        duration: 2000,
       });
+      this.ngOnInit();
+    });
   }
 
   //function simply navigates us to the user profile
   //called by button in navbar
   openUserProfileComponent(): void {
     this.router.navigate(['user']);
+  }
+
+  //used in navbar to send user back to movies screen
+  sendUserHome(): void {
+    this.router.navigate(['movies']);
   }
 }

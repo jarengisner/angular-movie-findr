@@ -1,11 +1,14 @@
 <mat-toolbar class="navbar">
-    <span style="font-size: xx-large; margin-left: 20px;">MovieFindr</span>
-    <button mat-button style="margin-right: 20px;">Logout</button>
+    <span class="navbar-title" style="font-size: xx-large; margin-left: 20px;"
+        (click)="sendUserHome()">MovieFindr</span>
+    <button mat-flat-button color="accent" style="margin-right: 20px;" (click)="logOut()">Logout</button>
 </mat-toolbar>
 <div class="userDiv">
     <h1>{{user.Username}}</h1>
     <!-- <button (click)="this.userTesting()">click to test</button> -->
+    <h2>{{user.Email}}</h2>
 </div>
+<h1 class="editUserTitle">Edit User Information</h1>
 <div class="form-div">
     <form id="toggler">
         <label>Username</label>
@@ -30,3 +33,4 @@
     <h1 class="delete-item" id="delete-title">Delete Account</h1>
     <button mat-raised-button color="warn" class="delete-item" (click)="deleteUserAccount()">Delete Account</button>
 </div>
+<app-user-favorites />
