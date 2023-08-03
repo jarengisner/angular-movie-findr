@@ -28,7 +28,6 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
       return this.movies;
     });
   }
@@ -38,8 +37,6 @@ export class MovieCardComponent {
   favoriteMovie(movieId: any): void {
     console.log(movieId);
     this.fetchApiData.addMovieToFavorites(movieId).subscribe((resp: any) => {
-      console.log(movieId);
-      console.log(resp);
       this.snackBar.open('Movie added to favorites', 'OK', {
         duration: 2000,
       });

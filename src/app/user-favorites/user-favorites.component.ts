@@ -1,49 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-user-favorites',
   templateUrl: './user-favorites.component.html',
   styleUrls: ['./user-favorites.component.scss'],
 })
-export class UserFavoritesComponent {
+export class UserFavoritesComponent implements OnInit {
   constructor(public fetchApiData: FetchApiDataService) {}
 
-  /* ngOnInit(): void {
+  ngOnInit(): void {
     this.getFavorites();
-  } */
+  }
   //empty array to hold favorites
   favorites: any[] = [];
+  user: any;
 
-  //function to fetch favorites from user
-  //on hold because of making a new fetchapidata function//
   getFavorites(): void {
-    let userFavorites: any[] = [];
-    let allMovies: any[] = [];
-    /* const user: any = localStorage.getItem('user'); */
-    this.fetchApiData.getUser().subscribe((result) => {
-      console.log(result);
-      userFavorites = result.Favorites;
-    });
+    this.user = localStorage.getItem('user');
+    this.user = JSON.parse(this.user);
+    console.log(this.user);
 
     this.fetchApiData.getAllMovies().subscribe((result) => {
-      allMovies = result;
+      this.favorites = result.filter(
+        (movie: { _id: any }) => this.user.Favorites.indexOf(movie._id) >= 0
+      );
     });
-
-    /*   console.log(userFavorites);
-    console.log(allMovies); 
-    for (let i = 0; i < userFavorites.length; i++) {
-      for (let j = 0; j < allMovies.length; i++) {
-        if (userFavorites[i] === allMovies[i]._id) {
-          this.favorites.push(allMovies[i]);
-        }
-      }
-    } */
-
-    this.favorites = allMovies.map((movie) => {
-      userFavorites.includes(movie._id) === true;
-    });
-
-    console.log(this.favorites);
   }
 }
