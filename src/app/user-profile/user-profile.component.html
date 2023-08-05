@@ -1,7 +1,8 @@
 <mat-toolbar class="navbar">
     <span class="navbar-title" style="font-size: xx-large; margin-left: 20px;"
         (click)="sendUserHome()">MovieFindr</span>
-    <button mat-flat-button color="accent" style="margin-right: 20px;" (click)="logOut()">Logout</button>
+    <button mat-flat-button color="accent" style="margin-right: 20px;" (click)="logOut()"
+        matTooltip="Log out">Logout</button>
 </mat-toolbar>
 
 <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
@@ -15,7 +16,7 @@
         </mat-card-content>
         <mat-card-actions>
             <mat-icon (click)="toggleHide()" style="cursor: pointer; padding-bottom: 30px; padding-top: 30px;"
-                id="edit-icon">edit</mat-icon>
+                id="edit-icon" matTooltip="Edit user information">edit</mat-icon>
         </mat-card-actions>
     </mat-card>
 </div>

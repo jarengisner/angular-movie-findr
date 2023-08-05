@@ -2,7 +2,7 @@
     <h1 style="text-align: center;" class="favorites-title">User Favorites</h1>
 </div>
 <div *ngIf="favorites.length === 0">
-    <h3 style="text-align: center;">Add Movies to your favorites to view favorites</h3>
+    <h3 style="text-align: center ;">Add Movies to your favorites to view favorites</h3>
 </div>
 <div class="favorite-movies-container" *ngIf="favorites.length > 0">
     <mat-card *ngFor="let movie of favorites;" style="flex: 1 1 auto; margin: 1rem;">
@@ -12,17 +12,20 @@
         </mat-card-header>
         <img src={{movie.ImageUrl}} alt={{movie.Title}} />
         <mat-card-actions>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                matTooltip="View Genre information">
                 Genre
             </button>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                matTooltip="View director information">
                 Director
             </button>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                matTooltip="View movie synopsis">
                 Synopsis
             </button>
-            <mat-icon style="cursor: pointer;" (click)="removeFavorite(movie._id)"
-                id="trash-icon">delete_outline</mat-icon>
+            <mat-icon style="cursor: pointer;" (click)="removeFavorite(movie._id)" id="trash-icon"
+                matTooltip="Remove from user favorites">delete_outline</mat-icon>
         </mat-card-actions>
     </mat-card>
 </div>
