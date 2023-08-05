@@ -16,6 +16,7 @@ import { UserFavoritesComponent } from '../user-favorites/user-favorites.compone
 })
 export class UserProfileComponent {
   user: any = {};
+  hide: boolean = false;
 
   //will be used to house our new user once they have input their new details
   @Input() newUserDetails = {
@@ -51,7 +52,7 @@ export class UserProfileComponent {
       .editUser(this.newUserDetails, this.user.Username)
       .subscribe(
         (result) => {
-          localStorage.setItem('user', result);
+          /* localStorage.setItem('user', result); */
           this.snackBar.open('User successfully updated', 'OK', {
             duration: 2000,
           });
@@ -62,6 +63,9 @@ export class UserProfileComponent {
           });
         }
       );
+    localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
+    this.router.navigate(['welcome']);
   }
 
   //function for deleting an account
@@ -72,6 +76,7 @@ export class UserProfileComponent {
         duration: 2000,
       });
     });
+    this.router.navigate(['welcome']);
   }
 
   //function for logging out
@@ -85,8 +90,20 @@ export class UserProfileComponent {
     this.router.navigate(['movies']);
   }
 
-  userTesting(): void {
-    console.log('hello');
-    document.getElementById('#toggler')?.classList.toggle('hidden');
+  checkHide(): boolean {
+    if (this.hide === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  toggleHide(): void {
+    console.log(this.hide);
+    if (this.hide === false) {
+      this.hide = true;
+    } else if (this.hide === true) {
+      this.hide = false;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { NgFor } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-favorites',
@@ -8,7 +9,10 @@ import { NgFor } from '@angular/common';
   styleUrls: ['./user-favorites.component.scss'],
 })
 export class UserFavoritesComponent implements OnInit {
-  constructor(public fetchApiData: FetchApiDataService) {}
+  constructor(
+    public fetchApiData: FetchApiDataService,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getFavorites();
@@ -17,7 +21,16 @@ export class UserFavoritesComponent implements OnInit {
   favorites: any[] = [];
   user: any;
 
+  refreshUser(): void {
+    this.fetchApiData.getUser().subscribe((result) => {
+      console.log(JSON.stringify(result));
+      result = JSON.stringify(result);
+      localStorage.setItem('user', result);
+    });
+  }
+
   getFavorites(): void {
+    this.refreshUser();
     this.user = localStorage.getItem('user');
     this.user = JSON.parse(this.user);
     console.log(this.user);
@@ -27,5 +40,15 @@ export class UserFavoritesComponent implements OnInit {
         (movie: { _id: any }) => this.user.Favorites.indexOf(movie._id) >= 0
       );
     });
+  }
+
+  removeFavorite(id: any): void {
+    this.fetchApiData.deleteFavorite(id).subscribe((result) => {
+      console.log(result);
+      this.snackBar.open('Movie removed from favorites', 'OK', {
+        duration: 2000,
+      });
+    });
+    this.ngOnInit();
   }
 }

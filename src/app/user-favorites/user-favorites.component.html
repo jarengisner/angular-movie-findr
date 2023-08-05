@@ -1,7 +1,10 @@
 <div style="margin-top: 50px;">
     <h1 style="text-align: center;" class="favorites-title">User Favorites</h1>
 </div>
-<div class="favorite-movies-container">
+<div *ngIf="favorites.length === 0">
+    <h3 style="text-align: center;">Add Movies to your favorites to view favorites</h3>
+</div>
+<div class="favorite-movies-container" *ngIf="favorites.length > 0">
     <mat-card *ngFor="let movie of favorites;" style="flex: 1 1 auto; margin: 1rem;">
         <mat-card-header>
             <mat-card-title>{{movie.Title}}</mat-card-title>
@@ -18,7 +21,8 @@
             <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
                 Synopsis
             </button>
-            <mat-icon style="cursor: pointer;">favorite_border</mat-icon>
+            <mat-icon style="cursor: pointer;" (click)="removeFavorite(movie._id)"
+                id="trash-icon">delete_outline</mat-icon>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 //imports our router into the login page
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-user-login-form',
@@ -41,12 +42,12 @@ export class UserLoginFormComponent implements OnInit {
         this.dialogRef.close();
         //this routes us to the movies section//
         this.router.navigate(['movies']);
-        this.snackBar.open('Welcome back!', 'OK', {
+        this.snackBar.open('Welcome!', 'OK', {
           duration: 2000,
         });
       },
-      (result) => {
-        this.snackBar.open(`Welcome back!`, 'OK', {
+      () => {
+        this.snackBar.open(`Something went wrong!`, 'OK', {
           duration: 2000,
         });
       }

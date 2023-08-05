@@ -5,8 +5,11 @@ import { OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 //imports our router into the login page
 import { Router } from '@angular/router';
+
+import { MovieInfoComponent } from '../movie-info/movie-info.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -15,10 +18,12 @@ import { Router } from '@angular/router';
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  filter: string = 'All';
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
-    public snackBar: MatSnackBar /* public dialog = MatDialog */
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -28,8 +33,20 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
+      if (this.filter !== 'All') {
+        let filteredMovies = this.movies.filter(
+          (movie) => movie.Genre.Name === this.filter
+        );
+        console.log(filteredMovies);
+        this.movies = filteredMovies;
+      }
       return this.movies;
     });
+  }
+
+  movieFilter(input: string): void {
+    this.filter = input;
+    this.ngOnInit();
   }
 
   //function to push movie into favorites//
@@ -48,6 +65,33 @@ export class MovieCardComponent {
   //called by button in navbar
   openUserProfileComponent(): void {
     this.router.navigate(['user']);
+  }
+
+  openInfo(title: string, description: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        title: title,
+        body: description,
+      },
+    });
+  }
+
+  openGenre(name: string, description: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        title: name,
+        body: description,
+      },
+    });
+  }
+
+  openDirector(name: string, bio: string): void {
+    this.dialog.open(MovieInfoComponent, {
+      data: {
+        title: name,
+        body: bio,
+      },
+    });
   }
 
   //used in navbar to send user back to movies screen

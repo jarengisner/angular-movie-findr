@@ -27,6 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserFavoritesComponent } from './user-favorites/user-favorites.component';
+import { MovieInfoComponent } from './movie-info/movie-info.component';
+import { MatSelectModule } from '@angular/material/select';
 
 //declares our routes into the application//
 const appRoutes: Routes = [
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     UserProfileComponent,
     UserFavoritesComponent,
+    MovieInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatIconModule,
     MatToolbarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

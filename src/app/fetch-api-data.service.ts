@@ -143,10 +143,12 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  public deleteFavorite(movieId: any, userName: any): Observable<any> {
+  public deleteFavorite(movieId: any): Observable<any> {
     const token = localStorage.getItem('token');
+    let user: any = localStorage.getItem('user');
+    user = JSON.parse(user);
     return this.http
-      .put(apiUrl + 'users/' + userName + 'movies/' + movieId, {
+      .delete(apiUrl + 'users/' + user.Username + '/' + 'movies/' + movieId, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),

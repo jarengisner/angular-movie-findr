@@ -2,12 +2,24 @@
 <mat-toolbar class="navbar">
     <span class="navbar-title" style="font-size: xx-large; margin-left: 20px;"
         (click)="sendUserHome()">MovieFindr</span>
-    <button mat-flat-button color="primary" style="margin-right: 20px;"
-        (click)="openUserProfileComponent()">Profile</button>
+    <button mat-flat-button color="primary" style="margin-right: 20px;" (click)="openUserProfileComponent()"><mat-icon
+            style="text-align: center; padding-left: 10px;">person_outline</mat-icon></button>
 </mat-toolbar>
 <!-- <div style="display: flex;  width:100%; overflow: auto; height: auto;"> -->
+<div style="margin-top: 20px;" class="filter-div">
+    <p style="margin-left: 20px; margin-right: 20px;">Filter</p>
+    <mat-form-field>
+        <mat-label>{{filter}}</mat-label>
+        <mat-select>
+            <mat-option (click)="movieFilter('All')">All</mat-option>
+            <mat-option (click)="movieFilter('Horror')">Horror</mat-option>
+            <mat-option (click)="movieFilter('Action')">Action</mat-option>
+            <mat-option (click)="movieFilter('Comedy')">Comedy</mat-option>
+            <mat-option (click)="movieFilter('Drama')">Drama</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
 <div class="movie-container">
-
     <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; margin: 1rem;">
         <mat-card-header>
             <mat-card-title>{{movie.Title}}</mat-card-title>
@@ -15,16 +27,20 @@
         </mat-card-header>
         <img src={{movie.ImageUrl}} alt={{movie.Title}} />
         <mat-card-actions>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                (click)="openGenre(movie.Genre.Name, movie.Genre.Description)">
                 Genre
             </button>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                (click)="openDirector(movie.Director.Name, movie.Director.Bio)">
                 Director
             </button>
-            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;">
+            <button mat-raised-button color="primary" class="movie-card-button" style="margin: 8px;"
+                (click)="openInfo(movie.Title, movie.Description)">
                 Synopsis
             </button>
-            <mat-icon style="cursor: pointer;" (click)="favoriteMovie(movie._id)">favorite_border</mat-icon>
+            <mat-icon style="cursor: pointer;" id="heart-icon"
+                (click)="favoriteMovie(movie._id)">favorite_border</mat-icon>
         </mat-card-actions>
     </mat-card>
 </div>
