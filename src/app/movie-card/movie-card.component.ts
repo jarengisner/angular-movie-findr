@@ -54,6 +54,8 @@ export class MovieCardComponent {
   favoriteMovie(movieId: any): void {
     console.log(movieId);
     this.fetchApiData.addMovieToFavorites(movieId).subscribe((resp: any) => {
+      //syncs our user up to keep favorites up to date
+      localStorage.setItem('user', JSON.stringify(resp));
       this.snackBar.open('Movie added to favorites', 'OK', {
         duration: 2000,
       });

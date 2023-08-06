@@ -21,16 +21,16 @@ export class UserFavoritesComponent implements OnInit {
   favorites: any[] = [];
   user: any;
 
-  refreshUser(): void {
+  /* refreshUser(): void {
     this.fetchApiData.getUser().subscribe((result) => {
       console.log(JSON.stringify(result));
       result = JSON.stringify(result);
       localStorage.setItem('user', result);
     });
-  }
+  } */
 
   getFavorites(): void {
-    this.refreshUser();
+    /* this.refreshUser(); */
     this.user = localStorage.getItem('user');
     this.user = JSON.parse(this.user);
     console.log(this.user);
@@ -44,6 +44,15 @@ export class UserFavoritesComponent implements OnInit {
 
   removeFavorite(id: any): void {
     this.fetchApiData.deleteFavorite(id).subscribe((result) => {
+      //locates movie in local array we want to remove
+      let index = this.favorites.findIndex((movie) => {
+        return movie._id === id;
+      });
+      //removes favorite from local array in component
+      this.favorites.splice(index, 1);
+      console.log(this.favorites);
+      //sync user locally
+      localStorage.setItem('user', JSON.stringify(result));
       console.log(result);
       this.snackBar.open('Movie removed from favorites', 'OK', {
         duration: 2000,

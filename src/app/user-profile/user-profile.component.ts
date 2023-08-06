@@ -17,6 +17,7 @@ import { UserFavoritesComponent } from '../user-favorites/user-favorites.compone
 export class UserProfileComponent {
   user: any = {};
   hide: boolean = false;
+  favorites: any[] = [];
 
   //will be used to house our new user once they have input their new details
   @Input() newUserDetails = {
@@ -43,6 +44,7 @@ export class UserProfileComponent {
       this.newUserDetails.Username = this.user.Username;
       this.newUserDetails.Password = this.user.Password;
       this.newUserDetails.Email = this.user.Email;
+      this.favorites = this.user.Favorites;
     });
   }
 
