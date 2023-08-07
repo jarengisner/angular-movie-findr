@@ -33,6 +33,9 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Function logs the user into the aplication and sets localStorage to hold the user and their JWT
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.loginData).subscribe(
       (result) => {

@@ -36,8 +36,9 @@ export class UserProfileComponent {
     this.getCurrentUser();
   }
 
-  //function to get the current user to display them on the page//
-  //search for user.Username
+  /**
+   * fetches the current user and sets their details to our newUser object, enabling editing
+   */
   getCurrentUser(): void {
     this.fetchApiData.getUser().subscribe((result) => {
       this.user = result;
@@ -48,7 +49,9 @@ export class UserProfileComponent {
     });
   }
 
-  //function that will call our api updating function on our new updated user from our form dialog
+  /**
+   * Updates the user as well as resets the localStorage making the user log in again
+   */
   updateThisUser(): void {
     this.fetchApiData
       .editUser(this.newUserDetails, this.user.Username)
@@ -70,7 +73,9 @@ export class UserProfileComponent {
     this.router.navigate(['welcome']);
   }
 
-  //function for deleting an account
+  /**
+   * Allows the user to delete their account
+   */
   deleteUserAccount(): void {
     this.fetchApiData.deleteUser(this.user.Username).subscribe((result) => {
       console.log(result);
@@ -81,17 +86,26 @@ export class UserProfileComponent {
     this.router.navigate(['welcome']);
   }
 
-  //function for logging out
+  /**
+   * logs the user out as well as clears the local storage
+   */
   logOut(): void {
     localStorage.setItem('user', '');
     localStorage.setItem('token', '');
     this.router.navigate(['welcome']);
   }
 
+  /**
+   * routes the user the home screen
+   */
   sendUserHome(): void {
     this.router.navigate(['movies']);
   }
 
+  /**
+   *
+   * @returns a state change if the editing form is hiddn or not
+   */
   checkHide(): boolean {
     if (this.hide === true) {
       return true;
@@ -100,6 +114,9 @@ export class UserProfileComponent {
     }
   }
 
+  /**
+   * toggles the state of the the editing form based on the current boolean value
+   */
   toggleHide(): void {
     console.log(this.hide);
     if (this.hide === false) {

@@ -30,6 +30,9 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * @returns all movies filtered by filter option
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -49,8 +52,11 @@ export class MovieCardComponent {
     this.ngOnInit();
   }
 
-  //function to push movie into favorites//
-  //function adds movie to favorites and then opens a snackbar to tell you it was completed//
+  /**
+   *
+   * @param movieId
+   * calls to fetchApiData to push a movie into a user's favorites
+   */
   favoriteMovie(movieId: any): void {
     console.log(movieId);
     this.fetchApiData.addMovieToFavorites(movieId).subscribe((resp: any) => {
@@ -63,12 +69,19 @@ export class MovieCardComponent {
     });
   }
 
-  //function simply navigates us to the user profile
-  //called by button in navbar
+  /**
+   * navigates to the users profile
+   */
   openUserProfileComponent(): void {
     this.router.navigate(['user']);
   }
 
+  /**
+   *
+   * @param title
+   * @param description
+   * opens modal containing information about this movie
+   */
   openInfo(title: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -78,6 +91,12 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   *
+   * @param name
+   * @param description
+   * opens modal containing information about this genre
+   */
   openGenre(name: string, description: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -87,6 +106,12 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   *
+   * @param name
+   * @param bio
+   * opens modal containing information about this genre
+   */
   openDirector(name: string, bio: string): void {
     this.dialog.open(MovieInfoComponent, {
       data: {
@@ -96,7 +121,9 @@ export class MovieCardComponent {
     });
   }
 
-  //used in navbar to send user back to movies screen
+  /**
+   * routes the user home all movies screen
+   */
   sendUserHome(): void {
     this.router.navigate(['movies']);
   }
